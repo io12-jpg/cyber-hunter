@@ -1,0 +1,105 @@
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="A local-first cybersecurity toolkit for stronger passwords and safer digital habits.">
+  <title>Cyber Hunter — Desktop Security Toolkit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Cyber Hunter home"><span class="brand-mark" aria-hidden="true">⌁</span><span>CYBER<span class="brand-accent">HUNTER</span><small>PERSONAL SECURITY TOOLKIT</small></span></a>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-item active" type="button" data-panel="overview"><span aria-hidden="true">◈</span> Overview</button>
+        <button class="nav-item" type="button" data-panel="password-generator"><span aria-hidden="true">⚿</span> Password generator</button>
+        <button class="nav-item" type="button" data-panel="strength-checker"><span aria-hidden="true">▰</span> Strength checker</button>
+        <button class="nav-item" type="button" data-panel="file-hash"><span aria-hidden="true">⌗</span> File hash</button>
+        <button class="nav-item" type="button" data-panel="security-quiz"><span aria-hidden="true">✳</span> Security quiz</button>
+        <button class="nav-item" type="button" data-panel="cyber-tips"><span aria-hidden="true">✧</span> Cyber tips</button>
+      </nav>
+      <div class="sidebar-footer"><span class="status-dot"></span><div><strong>LOCAL MODE</strong><small>Your data stays on this device</small></div></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><div class="breadcrumb"><span>WORKSPACE</span><b>/</b><strong id="currentLocation">Overview</strong></div><div class="topbar-status"><span class="status-dot"></span> ALL SYSTEMS PRIVATE</div></header>
+
+      <section id="overview" class="view active" aria-labelledby="welcomeTitle">
+        <div class="welcome-row"><div><p class="eyebrow"><span class="status-dot"></span> YOUR PERSONAL SECURITY DESK</p><h1 id="welcomeTitle">Stay one step <span>ahead.</span></h1><p class="intro">Simple tools for smarter everyday security. Everything runs locally in your browser.</p></div><div class="shield-art" aria-hidden="true"><div class="shield">⌑</div><span>DEFENSE<br>ACTIVE</span></div></div>
+        <div class="section-heading"><div><p class="eyebrow">YOUR TOOLKIT</p><h2>Choose a tool</h2></div><span class="section-count">05 MODULES</span></div>
+        <div class="tool-grid">
+          <button class="tool-card card-green" type="button" data-open="password-generator"><span class="card-icon" aria-hidden="true">⚿</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">01 / CREDENTIALS</span><strong>Password generator</strong><span>Create strong, random passwords on your device.</span></button>
+          <button class="tool-card card-blue" type="button" data-open="strength-checker"><span class="card-icon" aria-hidden="true">▰</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">02 / CREDENTIALS</span><strong>Strength checker</strong><span>Get a quick, private estimate of password strength.</span></button>
+          <button class="tool-card card-purple" type="button" data-open="file-hash"><span class="card-icon" aria-hidden="true">⌗</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">03 / INTEGRITY</span><strong>File hash</strong><span>Calculate a SHA-256 fingerprint for a file.</span></button>
+          <button class="tool-card card-orange" type="button" data-open="security-quiz"><span class="card-icon" aria-hidden="true">✳</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">04 / AWARENESS</span><strong>Security quiz</strong><span>Practice spotting everyday security risks.</span></button>
+          <button class="tool-card card-pink" type="button" data-open="cyber-tips"><span class="card-icon" aria-hidden="true">✧</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">05 / FIELD NOTES</span><strong>Cyber tips</strong><span>Small habits that make a real difference.</span></button>
+        </div>
+        <div class="privacy-banner"><span class="privacy-icon" aria-hidden="true">◉</span><div><strong>Private by design</strong><p>No accounts, uploads, analytics, or network calls. Your passwords and files are processed on this device, never uploaded.</p></div><span class="privacy-tag">OFFLINE-READY</span></div>
+      </section>
+
+      <section id="password-generator" class="view" aria-labelledby="generatorTitle" hidden>
+        <div class="view-heading"><p class="eyebrow">01 / CREDENTIALS</p><h1 id="generatorTitle">Password <span>generator</span></h1><p class="intro">Generate a unique password with your device's secure random number generator.</p></div>
+        <div class="workspace-card">
+          <label class="field-label" for="generatedPassword">GENERATED PASSWORD</label>
+          <div class="output-row"><input id="generatedPassword" class="password-output" type="text" readonly autocomplete="off" spellcheck="false" aria-label="Generated password"><button id="copyPassword" class="secondary-button" type="button">COPY</button><button id="generatePassword" class="icon-action" type="button" aria-label="Generate new password">↻</button></div>
+          <div class="length-row"><label class="field-label" for="passwordLength">LENGTH <strong id="lengthValue">20</strong></label><input id="passwordLength" type="range" min="8" max="64" value="20"></div>
+          <div class="options-grid">
+            <label class="check-option"><input id="includeUppercase" type="checkbox" checked><span class="custom-check"></span> Uppercase letters <small>A–Z</small></label>
+            <label class="check-option"><input id="includeLowercase" type="checkbox" checked><span class="custom-check"></span> Lowercase letters <small>a–z</small></label>
+            <label class="check-option"><input id="includeNumbers" type="checkbox" checked><span class="custom-check"></span> Numbers <small>0–9</small></label>
+            <label class="check-option"><input id="includeSymbols" type="checkbox" checked><span class="custom-check"></span> Symbols <small>!@#$…</small></label>
+          </div>
+          <p id="generatorMessage" class="feedback" aria-live="polite"></p>
+          <button id="generatePasswordMain" class="primary-button" type="button"><span aria-hidden="true">✳</span> GENERATE PASSWORD</button>
+        </div>
+        <p class="note"><span aria-hidden="true">ⓘ</span> Use a different password for every account. Store it in a trusted password manager.</p>
+      </section>
+
+      <section id="strength-checker" class="view" aria-labelledby="checkerTitle" hidden>
+        <div class="view-heading"><p class="eyebrow">02 / CREDENTIALS</p><h1 id="checkerTitle">Strength <span>checker</span></h1><p class="intro">Check password characteristics without sending them anywhere.</p></div>
+        <div class="workspace-card">
+          <label class="field-label" for="passwordToCheck">YOUR PASSWORD</label>
+          <div class="input-wrap"><input id="passwordToCheck" type="password" autocomplete="new-password" placeholder="Type a password to check"><button id="togglePasswordVisibility" class="visibility-button" type="button" aria-label="Show password">SHOW</button></div>
+          <div class="strength-meter" aria-label="Password strength"><span id="strengthFill"></span></div>
+          <div class="strength-result"><strong id="strengthLabel">Waiting for input</strong><span id="strengthBits"></span></div>
+          <ul id="strengthFeedback" class="strength-feedback"><li>Enter a password to see suggestions.</li></ul>
+        </div>
+        <p class="note"><span aria-hidden="true">ⓘ</span> This is a local estimate, not a guarantee against every attack. Avoid testing a password you currently use.</p>
+      </section>
+
+      <section id="file-hash" class="view" aria-labelledby="hashTitle" hidden>
+        <div class="view-heading"><p class="eyebrow">03 / INTEGRITY</p><h1 id="hashTitle">File <span>hash</span></h1><p class="intro">Calculate a SHA-256 checksum in your browser to help verify file integrity.</p></div>
+        <div class="workspace-card">
+          <label id="fileDrop" class="drop-zone" for="fileInput"><span class="upload-icon" aria-hidden="true">↑</span><strong>Choose a file to hash</strong><span>Click to browse your device</span><input id="fileInput" type="file"></label>
+          <p id="fileStatus" class="file-status" aria-live="polite">Files are read locally and are not uploaded.</p>
+          <div id="hashResult" class="hash-result hidden"><div class="hash-result-heading"><span>SHA-256</span><button id="copyHash" class="secondary-button" type="button">COPY HASH</button></div><code id="hashValue"></code></div>
+          <p id="hashError" class="feedback error" aria-live="polite"></p>
+        </div>
+        <p class="note"><span aria-hidden="true">ⓘ</span> A matching hash helps detect changes, but does not prove a file is safe or trustworthy.</p>
+      </section>
+
+      <section id="security-quiz" class="view" aria-labelledby="quizTitle" hidden>
+        <div class="view-heading"><p class="eyebrow">04 / AWARENESS</p><h1 id="quizTitle">Security <span>quiz</span></h1><p class="intro">Five quick scenarios. See how your everyday security instincts stack up.</p></div>
+        <div class="workspace-card quiz-card">
+          <div class="quiz-progress"><span id="quizStep">QUESTION 01 / 05</span><div class="progress-track"><span id="quizProgress"></span></div></div>
+          <h2 id="quizQuestion"></h2><div id="quizOptions" class="quiz-options"></div><p id="quizFeedback" class="quiz-feedback" aria-live="polite"></p>
+          <button id="quizNext" class="primary-button" type="button" disabled>CHECK ANSWER</button>
+          <div id="quizComplete" class="quiz-complete hidden"><strong id="quizScore"></strong><p id="quizSummary"></p><button id="quizRestart" class="secondary-button" type="button">PLAY AGAIN</button></div>
+        </div>
+      </section>
+
+      <section id="cyber-tips" class="view" aria-labelledby="tipsTitle" hidden>
+        <div class="view-heading"><p class="eyebrow">05 / FIELD NOTES</p><h1 id="tipsTitle">Cyber <span>tips</span></h1><p class="intro">Practical reminders for safer digital habits.</p></div>
+        <div class="tip-feature"><div class="tip-orbit" aria-hidden="true">✧</div><p class="eyebrow">TODAY'S FIELD NOTE</p><h2 id="tipTitle"></h2><p id="tipDescription"></p><div class="tip-controls"><span id="tipCount"></span><button id="nextTip" class="secondary-button" type="button">NEXT TIP <span aria-hidden="true">→</span></button></div></div>
+        <div class="tip-reminder"><span aria-hidden="true">◈</span><p><strong>Remember:</strong> Security is a habit, not a one-time setting.</p></div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
