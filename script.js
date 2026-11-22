@@ -3,7 +3,16 @@
   const $ = (id) => document.getElementById(id);
   const navButtons = [...document.querySelectorAll(".nav-item")];
   const views = [...document.querySelectorAll(".view")];
-  const titles = { overview: "Overview", "password-generator": "Password generator", "name-generator": "Name generator", "google-search": "Google search", "strength-checker": "Strength checker", "file-hash": "File hash", "security-quiz": "Security quiz", "cyber-tips": "Cyber tips" };
+  const viewRegistry = new Map([
+    ["overview", { title: "Overview" }],
+    ["password-generator", { title: "Password generator" }],
+    ["name-generator", { title: "Name generator" }],
+    ["google-search", { title: "Google search" }],
+    ["strength-checker", { title: "Strength checker" }],
+    ["file-hash", { title: "File hash" }],
+    ["security-quiz", { title: "Security quiz" }],
+    ["cyber-tips", { title: "Cyber tips" }]
+  ]);
 
   $("themeToggle").addEventListener("click", () => {
     const lightMode = document.documentElement.dataset.theme !== "light";
@@ -15,7 +24,8 @@
   });
 
   function showView(name) {
-    if (!titles[name]) return;
+    const registeredView = viewRegistry.get(name);
+    if (!registeredView) return;
     views.forEach((view) => {
       const active = view.id === name;
       view.classList.toggle("active", active);
@@ -26,21 +36,32 @@
       button.classList.toggle("active", active);
       button.setAttribute("aria-current", active ? "page" : "false");
     });
-    $("currentLocation").textContent = titles[name];
+    $("currentLocation").textContent = registeredView.title;
     window.scrollTo(0, 0);
   }
   navButtons.forEach((button) => button.addEventListener("click", () => showView(button.dataset.panel)));
   document.querySelectorAll("[data-open]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.open)));
   const googleQuery = $("googleQuery");
   $("googleSearchForm").addEventListener("submit", (event) => {
+    event.preventDefault();
     const query = googleQuery.value.trim();
-    if (!query) { event.preventDefault(); googleQuery.focus(); return; }
+    if (!query) { googleQuery.focus(); return; }
     googleQuery.value = query;
+    const results = $("googleResults");
+    const loading = $("googleLoading");
+    loading.classList.remove("hidden");
+    results.classList.add("hidden");
+    results.src = `https://www.google.com/search?igu=1&output=embed&q=${encodeURIComponent(query)}`;
+  });
+  $("googleResults").addEventListener("load", () => {
+    $("googleLoading").classList.add("hidden");
+    $("googleResults").classList.remove("hidden");
   });
   document.querySelectorAll(".quick-search").forEach((button) => {
     button.addEventListener("click", () => {
       googleQuery.value = button.dataset.query;
       googleQuery.focus();
+      $("googleSearchForm").requestSubmit();
     });
   });
 

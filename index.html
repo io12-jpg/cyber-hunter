@@ -99,7 +99,7 @@
 
       <section id="google-search" class="view" aria-labelledby="googleSearchTitle" hidden>
         <div class="view-heading"><p class="eyebrow">07 / WEB</p><h1 id="googleSearchTitle">Google <span>search</span></h1><p class="intro">Search the web for cyber safety information or any other topic.</p></div>
-        <div class="workspace-card">
+        <div class="workspace-card google-workspace">
           <form id="googleSearchForm" class="google-search-form" action="https://www.google.com/search" method="get">
             <label class="field-label" for="googleQuery">SEARCH THE WEB</label>
             <div class="google-search-row"><input id="googleQuery" class="name-input" type="search" name="q" autocomplete="off" placeholder="Search Google..." required><button class="primary-button" type="submit">SEARCH GOOGLE ↗</button></div>
@@ -111,7 +111,8 @@
             <button class="quick-search" type="button" data-query="online fraud prevention tips">Online fraud prevention</button>
             <button class="quick-search" type="button" data-query="how to report cybercrime in India">Report cybercrime</button>
           </div>
-          <p class="feedback">Google results open in this tab because Google blocks embedding search pages. Use your browser's Back button to return to Cyber Hunter.</p>
+          <div id="googleLoading" class="google-loading hidden" aria-live="polite">LOADING GOOGLE RESULTS...</div>
+          <iframe id="googleResults" class="google-results hidden" title="Google search results" loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </section>
 
