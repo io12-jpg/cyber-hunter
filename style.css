@@ -39,6 +39,7 @@ button:focus-visible, input:focus-visible, a:focus-visible, label:focus-within {
 .view { display: none; max-width: 1040px; margin: 0 auto; padding: 47px 0 65px; animation: appear .22s ease-out; }
 .view.active { display: block; }
 .view[hidden] { display: none !important; }
+.site-footer { max-width: 1040px; margin: 0 auto; padding: 17px 0 22px; border-top: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); text-align: center; }
 @keyframes appear { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 .welcome-row { display: flex; min-height: 210px; align-items: center; justify-content: space-between; }
 .eyebrow { margin: 0 0 12px; }
