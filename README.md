@@ -5,13 +5,16 @@ Cyber Hunter is a local-first cybersecurity toolkit built with plain HTML, CSS, 
 ## Features
 
 - Generate random passwords with the Web Crypto API.
+- Generate username, brand, startup, gaming, YouTube, and domain name ideas from optional keywords and style filters.
 - Get a local, approximate password-strength estimate.
 - Calculate SHA-256 file hashes with the Web Crypto API.
 - Practice security basics with a short quiz.
 - Browse practical cybersecurity tips.
+- Switch between dark and light themes; the interface adapts for smaller screens and reduced-motion preferences.
+- Search Google from Cyber Hunter; results open in the current tab.
 
 ## Run
 
-Open `index.html` in a modern browser. SHA-256 file hashing requires a secure context, such as HTTPS or `localhost`; some browser security features may be limited when opening a local file directly.
+Run `powershell -NoProfile -ExecutionPolicy Bypass -File .\serve.ps1` in PowerShell, then visit `http://localhost:8765/`. SHA-256 file hashing requires a secure context such as HTTPS or `localhost`.
 
-The app does not upload passwords or files. The strength checker is an educational estimate, not a security guarantee. A file hash can help verify integrity but cannot determine whether a file is safe.
+Passwords, names, and files are processed locally. Google receives a search query only when you submit it. The strength checker is an educational estimate, not a security guarantee. A file hash can help verify integrity but cannot determine whether a file is safe.

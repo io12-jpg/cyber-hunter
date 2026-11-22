@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#080b12">
-  <meta name="description" content="A local-first cybersecurity toolkit for stronger passwords and safer digital habits.">
+  <meta name="description" content="A local-first cybersecurity toolkit with password, name, and cyber awareness tools.">
   <title>Cyber Hunter — Desktop Security Toolkit</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -18,28 +18,32 @@
       <nav class="navigation" aria-label="Main navigation">
         <button class="nav-item active" type="button" data-panel="overview"><span aria-hidden="true">◈</span> Overview</button>
         <button class="nav-item" type="button" data-panel="password-generator"><span aria-hidden="true">⚿</span> Password generator</button>
+        <button class="nav-item" type="button" data-panel="name-generator"><span aria-hidden="true">✧</span> Name generator</button>
+        <button class="nav-item" type="button" data-panel="google-search"><span aria-hidden="true">⌕</span> Google search</button>
         <button class="nav-item" type="button" data-panel="strength-checker"><span aria-hidden="true">▰</span> Strength checker</button>
         <button class="nav-item" type="button" data-panel="file-hash"><span aria-hidden="true">⌗</span> File hash</button>
         <button class="nav-item" type="button" data-panel="security-quiz"><span aria-hidden="true">✳</span> Security quiz</button>
         <button class="nav-item" type="button" data-panel="cyber-tips"><span aria-hidden="true">✧</span> Cyber tips</button>
       </nav>
-      <div class="sidebar-footer"><span class="status-dot"></span><div><strong>LOCAL MODE</strong><small>Your data stays on this device</small></div></div>
+      <div class="sidebar-footer"><span class="status-dot"></span><div><strong>LOCAL MODE</strong><small>Search the web only when you choose</small></div></div>
     </aside>
 
     <main class="main-content">
-      <header class="topbar"><div class="breadcrumb"><span>WORKSPACE</span><b>/</b><strong id="currentLocation">Overview</strong></div><div class="topbar-status"><span class="status-dot"></span> ALL SYSTEMS PRIVATE</div></header>
+      <header class="topbar"><div class="breadcrumb"><span>WORKSPACE</span><b>/</b><strong id="currentLocation">Overview</strong></div><div class="topbar-actions"><button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false"><span id="themeToggleIcon" aria-hidden="true">☼</span><span id="themeToggleLabel">LIGHT MODE</span></button><div class="topbar-status"><span class="status-dot"></span> TOOLS RUN LOCALLY</div></div></header>
 
       <section id="overview" class="view active" aria-labelledby="welcomeTitle">
-        <div class="welcome-row"><div><p class="eyebrow"><span class="status-dot"></span> YOUR PERSONAL SECURITY DESK</p><h1 id="welcomeTitle">Stay one step <span>ahead.</span></h1><p class="intro">Simple tools for smarter everyday security. Everything runs locally in your browser.</p></div><div class="shield-art" aria-hidden="true"><div class="shield">⌑</div><span>DEFENSE<br>ACTIVE</span></div></div>
-        <div class="section-heading"><div><p class="eyebrow">YOUR TOOLKIT</p><h2>Choose a tool</h2></div><span class="section-count">05 MODULES</span></div>
+        <div class="welcome-row"><div><p class="eyebrow"><span class="status-dot"></span> YOUR PERSONAL SECURITY DESK</p><h1 id="welcomeTitle">Stay one step <span>ahead.</span></h1><p class="intro">Private security tools, plus Google search whenever you need it.</p></div><div class="shield-art" aria-hidden="true"><div class="shield">⌑</div><span>DEFENSE<br>ACTIVE</span></div></div>
+        <div class="section-heading"><div><p class="eyebrow">YOUR TOOLKIT</p><h2>Choose a tool</h2></div><span class="section-count">07 MODULES</span></div>
         <div class="tool-grid">
           <button class="tool-card card-green" type="button" data-open="password-generator"><span class="card-icon" aria-hidden="true">⚿</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">01 / CREDENTIALS</span><strong>Password generator</strong><span>Create strong, random passwords on your device.</span></button>
+          <button class="tool-card card-pink" type="button" data-open="name-generator"><span class="card-icon" aria-hidden="true">✧</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">06 / CREATIVITY</span><strong>Name generator</strong><span>Find name ideas for usernames, brands, startups, and more.</span></button>
+          <button class="tool-card card-blue" type="button" data-open="google-search"><span class="card-icon" aria-hidden="true">⌕</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">07 / WEB</span><strong>Google search</strong><span>Search for cyber safety guidance and other topics.</span></button>
           <button class="tool-card card-blue" type="button" data-open="strength-checker"><span class="card-icon" aria-hidden="true">▰</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">02 / CREDENTIALS</span><strong>Strength checker</strong><span>Get a quick, private estimate of password strength.</span></button>
           <button class="tool-card card-purple" type="button" data-open="file-hash"><span class="card-icon" aria-hidden="true">⌗</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">03 / INTEGRITY</span><strong>File hash</strong><span>Calculate a SHA-256 fingerprint for a file.</span></button>
           <button class="tool-card card-orange" type="button" data-open="security-quiz"><span class="card-icon" aria-hidden="true">✳</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">04 / AWARENESS</span><strong>Security quiz</strong><span>Practice spotting everyday security risks.</span></button>
           <button class="tool-card card-pink" type="button" data-open="cyber-tips"><span class="card-icon" aria-hidden="true">✧</span><span class="card-arrow" aria-hidden="true">↗</span><span class="card-kicker">05 / FIELD NOTES</span><strong>Cyber tips</strong><span>Small habits that make a real difference.</span></button>
         </div>
-        <div class="privacy-banner"><span class="privacy-icon" aria-hidden="true">◉</span><div><strong>Private by design</strong><p>No accounts, uploads, analytics, or network calls. Your passwords and files are processed on this device, never uploaded.</p></div><span class="privacy-tag">OFFLINE-READY</span></div>
+        <div class="privacy-banner"><span class="privacy-icon" aria-hidden="true">◉</span><div><strong>Private by design</strong><p>Your passwords, names, and files stay on this device. Google only receives a search when you choose to submit one.</p></div><span class="privacy-tag">LOCAL TOOLS</span></div>
       </section>
 
       <section id="password-generator" class="view" aria-labelledby="generatorTitle" hidden>
@@ -58,6 +62,57 @@
           <button id="generatePasswordMain" class="primary-button" type="button"><span aria-hidden="true">✳</span> GENERATE PASSWORD</button>
         </div>
         <p class="note"><span aria-hidden="true">ⓘ</span> Use a different password for every account. Store it in a trusted password manager.</p>
+      </section>
+
+      <section id="name-generator" class="view" aria-labelledby="nameGeneratorTitle" hidden>
+        <div class="view-heading"><p class="eyebrow">06 / CREATIVITY</p><h1 id="nameGeneratorTitle">Name <span>generator</span></h1><p class="intro">Choose a category, add an optional keyword, and generate fresh name ideas.</p></div>
+        <div class="workspace-card">
+          <label class="field-label" for="nameCategory">NAME CATEGORY</label>
+          <select id="nameCategory" class="name-input">
+            <option value="username">Username</option>
+            <option value="brand">Brand Name</option>
+            <option value="startup">Startup Name</option>
+            <option value="gaming">Gaming Name</option>
+            <option value="youtube">YouTube Channel Name</option>
+            <option value="domain">Domain Name</option>
+          </select>
+          <label class="field-label" for="nameKeyword">KEYWORD <span>OPTIONAL</span></label>
+          <input id="nameKeyword" class="name-input" type="text" maxlength="22" autocomplete="off" placeholder="Enter your name or a keyword">
+          <fieldset class="name-filter-set">
+            <legend class="field-label">EXTRA FILTERS</legend>
+            <div class="name-filter-grid">
+              <label class="check-option"><input type="checkbox" value="short"><span class="custom-check"></span>Short names</label>
+              <label class="check-option"><input type="checkbox" value="professional"><span class="custom-check"></span>Professional names</label>
+              <label class="check-option"><input type="checkbox" value="modern"><span class="custom-check"></span>Modern names</label>
+              <label class="check-option"><input type="checkbox" value="tech"><span class="custom-check"></span>Tech names</label>
+              <label class="check-option"><input type="checkbox" value="anime"><span class="custom-check"></span>Anime names</label>
+              <label class="check-option"><input type="checkbox" value="cyber"><span class="custom-check"></span>Cyber names</label>
+              <label class="check-option"><input type="checkbox" value="one-word"><span class="custom-check"></span>One-word names</label>
+            </div>
+          </fieldset>
+          <p id="nameGeneratorMessage" class="feedback" aria-live="polite">Choose a category and generate suggestions.</p>
+          <button id="generateNames" class="primary-button" type="button"><span aria-hidden="true">✳</span> GENERATE NAMES</button>
+        </div>
+        <div id="nameResults" class="name-results" aria-label="Name suggestions" aria-live="polite"></div>
+        <p class="note"><span aria-hidden="true">ⓘ</span> Suggestions are generated locally. Check availability before using a name for a username, brand, or domain.</p>
+      </section>
+
+      <section id="google-search" class="view" aria-labelledby="googleSearchTitle" hidden>
+        <div class="view-heading"><p class="eyebrow">07 / WEB</p><h1 id="googleSearchTitle">Google <span>search</span></h1><p class="intro">Search the web for cyber safety information or any other topic.</p></div>
+        <div class="workspace-card">
+          <form id="googleSearchForm" class="google-search-form" action="https://www.google.com/search" method="get">
+            <label class="field-label" for="googleQuery">SEARCH THE WEB</label>
+            <div class="google-search-row"><input id="googleQuery" class="name-input" type="search" name="q" autocomplete="off" placeholder="Search Google..." required><button class="primary-button" type="submit">SEARCH GOOGLE ↗</button></div>
+          </form>
+          <p class="field-label quick-search-label">POPULAR CYBER TOPICS</p>
+          <div class="quick-searches">
+            <button class="quick-search" type="button" data-query="cybercrime awareness and prevention">Cybercrime awareness</button>
+            <button class="quick-search" type="button" data-query="how to recognize phishing emails">Phishing safety</button>
+            <button class="quick-search" type="button" data-query="online fraud prevention tips">Online fraud prevention</button>
+            <button class="quick-search" type="button" data-query="how to report cybercrime in India">Report cybercrime</button>
+          </div>
+          <p class="feedback">Google results open in this tab because Google blocks embedding search pages. Use your browser's Back button to return to Cyber Hunter.</p>
+        </div>
       </section>
 
       <section id="strength-checker" class="view" aria-labelledby="checkerTitle" hidden>

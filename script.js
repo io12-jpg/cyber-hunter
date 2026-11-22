@@ -3,7 +3,16 @@
   const $ = (id) => document.getElementById(id);
   const navButtons = [...document.querySelectorAll(".nav-item")];
   const views = [...document.querySelectorAll(".view")];
-  const titles = { overview: "Overview", "password-generator": "Password generator", "strength-checker": "Strength checker", "file-hash": "File hash", "security-quiz": "Security quiz", "cyber-tips": "Cyber tips" };
+  const titles = { overview: "Overview", "password-generator": "Password generator", "name-generator": "Name generator", "google-search": "Google search", "strength-checker": "Strength checker", "file-hash": "File hash", "security-quiz": "Security quiz", "cyber-tips": "Cyber tips" };
+
+  $("themeToggle").addEventListener("click", () => {
+    const lightMode = document.documentElement.dataset.theme !== "light";
+    document.documentElement.dataset.theme = lightMode ? "light" : "dark";
+    $("themeToggle").setAttribute("aria-pressed", String(lightMode));
+    $("themeToggle").setAttribute("aria-label", lightMode ? "Switch to dark mode" : "Switch to light mode");
+    $("themeToggleIcon").textContent = lightMode ? "☾" : "☼";
+    $("themeToggleLabel").textContent = lightMode ? "DARK MODE" : "LIGHT MODE";
+  });
 
   function showView(name) {
     if (!titles[name]) return;
@@ -22,6 +31,18 @@
   }
   navButtons.forEach((button) => button.addEventListener("click", () => showView(button.dataset.panel)));
   document.querySelectorAll("[data-open]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.open)));
+  const googleQuery = $("googleQuery");
+  $("googleSearchForm").addEventListener("submit", (event) => {
+    const query = googleQuery.value.trim();
+    if (!query) { event.preventDefault(); googleQuery.focus(); return; }
+    googleQuery.value = query;
+  });
+  document.querySelectorAll(".quick-search").forEach((button) => {
+    button.addEventListener("click", () => {
+      googleQuery.value = button.dataset.query;
+      googleQuery.focus();
+    });
+  });
 
   const passwordLength = $("passwordLength");
   const characterSets = [
@@ -59,6 +80,111 @@
   $("generatePasswordMain").addEventListener("click", generatePassword);
   passwordLength.addEventListener("input", () => { $("lengthValue").textContent = passwordLength.value; generatePassword(); });
   characterSets.forEach((set) => $(set.id).addEventListener("change", generatePassword));
+  const nameStyleWords = {
+    general: ["Orbit", "Comet", "Echo", "Maple", "Sparrow", "Atlas", "Pioneer"],
+    professional: ["Summit", "Sterling", "Meridian", "Crest", "Horizon"],
+    modern: ["Nova", "Luma", "Aero", "Vanta", "Nexa"],
+    tech: ["Byte", "Pixel", "Nexus", "Quantum", "Circuit"],
+    anime: ["Kitsune", "Ronin", "Shinobi", "Hoshi", "Kairo"],
+    cyber: ["Cipher", "Ghost", "Neon", "Phantom", "Rogue"]
+  };
+  const shortNameStyleWords = {
+    general: ["Echo", "Nova", "Aero", "Luma"],
+    professional: ["Apex", "Crest", "Pact", "Noble"],
+    modern: ["Nova", "Luma", "Aero", "Nexa"],
+    tech: ["Byte", "Code", "Data", "Nex"],
+    anime: ["Kiro", "Rin", "Yuki", "Hoshi"],
+    cyber: ["Neon", "Null", "Rift", "Hex"]
+  };
+  const nameCategory = $("nameCategory");
+  const nameKeyword = $("nameKeyword");
+  const nameResults = $("nameResults");
+  const nameGeneratorMessage = $("nameGeneratorMessage");
+  function choose(items) { return items[secureIndex(items.length)]; }
+  function generateNames() {
+    const category = nameCategory.value;
+    const filters = [...document.querySelectorAll(".name-filter-grid input:checked")].map((input) => input.value);
+    const short = filters.includes("short");
+    const oneWord = filters.includes("one-word");
+    const selectedStyles = filters.filter((filter) => nameStyleWords[filter]);
+    const styleWordSets = short ? shortNameStyleWords : nameStyleWords;
+    const styleWords = selectedStyles.length
+      ? selectedStyles.flatMap((style) => styleWordSets[style])
+      : [...styleWordSets.general, ...styleWordSets.modern];
+
+    const keywordInput = nameKeyword.value.trim();
+    let keywordParts = keywordInput
+      .split(/\s+/)
+      .map((word) => word.replace(/[^\p{L}\p{N}]/gu, ""))
+      .filter(Boolean)
+      .map((word) => word[0].toLocaleUpperCase() + word.slice(1));
+    keywordParts = [Array.from(keywordParts.join("")).slice(0, short ? 4 : 22).join("")].filter(Boolean);
+    const usableKeyword = keywordParts.length > 0;
+    const separators = oneWord ? "" : " ";
+    const suffixes = {
+      brand: short ? ["Co", "HQ"] : ["Studio", "Works", "Collective"],
+      startup: short ? ["AI", "X"] : ["Labs", "Systems", "Ventures"],
+      gaming: short ? ["GG", "X"] : ["GG", "Plays", "Gaming"],
+      youtube: short ? ["TV", "HQ"] : ["TV", "Plays", "Studio", "Media"]
+    };
+    const domains = [".com", ".io", ".net", ".co"];
+    const suggestions = new Set();
+    let attempts = 0;
+    while (suggestions.size < 6 && attempts < 100) {
+      attempts++;
+      const styleWord = choose(styleWords);
+      const coreParts = usableKeyword
+        ? [choose(keywordParts), styleWord]
+        : [styleWord, choose(nameStyleWords.general)];
+      const orderedParts = secureIndex(2) ? [...coreParts].reverse() : coreParts;
+      const core = orderedParts.join(separators);
+      let suggestion;
+      if (category === "username") suggestion = coreParts.join("") + String(secureIndex(90) + 10);
+      else if (category === "brand" || category === "startup" || category === "youtube") suggestion = core + separators + choose(suffixes[category]);
+      else if (category === "gaming") suggestion = coreParts.join("") + choose(suffixes.gaming);
+      else suggestion = coreParts.join("") + choose(domains);
+      suggestions.add(suggestion);
+    }
+    let fallbackIndex = 1;
+    while (suggestions.size < 6) {
+      const firstSuggestion = [...suggestions][0];
+      const fallback = category === "domain"
+        ? firstSuggestion.replace(/\.[^.]+$/, "") + fallbackIndex++ + ".com"
+        : firstSuggestion + fallbackIndex++;
+      suggestions.add(fallback);
+    }
+
+    nameResults.replaceChildren(...[...suggestions].map((suggestion, index) => {
+      const item = document.createElement("div");
+      item.className = "name-suggestion";
+      const number = document.createElement("span");
+      number.className = "suggestion-number";
+      number.textContent = String(index + 1).padStart(2, "0");
+      const label = document.createElement("strong");
+      label.textContent = suggestion;
+      const copy = document.createElement("button");
+      copy.className = "secondary-button";
+      copy.type = "button";
+      copy.textContent = "COPY";
+      copy.setAttribute("aria-label", "Copy " + suggestion);
+      copy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(suggestion);
+          nameGeneratorMessage.textContent = "Copied “" + suggestion + "” to clipboard.";
+        } catch (error) {
+          nameGeneratorMessage.textContent = "Clipboard access failed. Select and copy the suggestion manually.";
+        }
+      });
+      item.append(number, label, copy);
+      return item;
+    }));
+    nameGeneratorMessage.textContent = keywordInput && !usableKeyword
+      ? "Keyword had no usable letters or numbers. Generated random suggestions instead."
+      : "Generated 6 suggestions locally.";
+  }
+  $("generateNames").addEventListener("click", generateNames);
+  generateNames();
+
   $("copyPassword").addEventListener("click", async () => {
     const password = $("generatedPassword").value;
     if (!password) { $("generatorMessage").textContent = "Generate a password before copying."; return; }
