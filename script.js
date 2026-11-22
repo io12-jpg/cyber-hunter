@@ -42,6 +42,7 @@
   navButtons.forEach((button) => button.addEventListener("click", () => showView(button.dataset.panel)));
   document.querySelectorAll("[data-open]").forEach((button) => button.addEventListener("click", () => showView(button.dataset.open)));
   const googleQuery = $("googleQuery");
+  let currentFrameUrl = "";
   $("googleSearchForm").addEventListener("submit", (event) => {
     event.preventDefault();
     const query = googleQuery.value.trim();
@@ -49,13 +50,46 @@
     googleQuery.value = query;
     const results = $("googleResults");
     const loading = $("googleLoading");
+    currentFrameUrl = `https://www.google.com/search?igu=1&output=embed&q=${encodeURIComponent(query)}`;
     loading.classList.remove("hidden");
+    loading.textContent = "LOADING GOOGLE RESULTS...";
     results.classList.add("hidden");
-    results.src = `https://www.google.com/search?igu=1&output=embed&q=${encodeURIComponent(query)}`;
+    $("googleFrameFallback").classList.add("hidden");
+    results.src = currentFrameUrl;
   });
   $("googleResults").addEventListener("load", () => {
     $("googleLoading").classList.add("hidden");
     $("googleResults").classList.remove("hidden");
+    $("googleFrameFallback").classList.add("hidden");
+  });
+  $("websiteSearchForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const websiteInput = $("websiteUrl");
+    let websiteUrl = websiteInput.value.trim();
+    if (!websiteUrl) { websiteInput.focus(); return; }
+    if (!/^https?:\/\//i.test(websiteUrl)) websiteUrl = `https://${websiteUrl}`;
+    try {
+      const parsedUrl = new URL(websiteUrl);
+      if (!["http:", "https:"].includes(parsedUrl.protocol)) throw new Error("Unsupported protocol");
+      currentFrameUrl = parsedUrl.href;
+      websiteInput.value = parsedUrl.href;
+      $("googleLoading").classList.remove("hidden");
+      $("googleLoading").textContent = "LOADING WEBSITE...";
+      $("googleResults").classList.add("hidden");
+      $("googleResults").src = currentFrameUrl;
+      $("googleFrameFallback").classList.add("hidden");
+      window.setTimeout(() => {
+        $("googleLoading").classList.add("hidden");
+        $("googleResults").classList.remove("hidden");
+        $("googleFrameFallback").classList.remove("hidden");
+      }, 2500);
+    } catch {
+      $("googleFrameMessage").textContent = "Enter a valid website address, such as example.com.";
+      $("googleFrameFallback").classList.remove("hidden");
+    }
+  });
+  $("openCurrentTab").addEventListener("click", () => {
+    if (currentFrameUrl) window.location.assign(currentFrameUrl);
   });
   document.querySelectorAll(".quick-search").forEach((button) => {
     button.addEventListener("click", () => {

@@ -37,6 +37,7 @@ button:focus-visible, input:focus-visible, a:focus-visible, label:focus-within {
 .topbar-status { display: flex; align-items: center; gap: 8px; color: #9aa8b5; font: 9px var(--mono); letter-spacing: .7px; }
 .topbar-status .status-dot { width: 6px; height: 6px; }
 .view { display: none; max-width: 1040px; margin: 0 auto; padding: 47px 0 65px; animation: appear .22s ease-out; }
+.hidden { display: none !important; }
 .view.active { display: block; }
 .view[hidden] { display: none !important; }
 .site-footer { max-width: 1040px; margin: 0 auto; padding: 17px 0 22px; border-top: 1px solid var(--line); color: var(--muted); font: 10px var(--mono); text-align: center; }
@@ -83,6 +84,9 @@ h2 { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -.4px; }
 .google-workspace { max-width: none; }
 .google-loading { margin-top: 18px; color: var(--green); font: 10px var(--mono); letter-spacing: .8px; }
 .google-results { width: 100%; height: min(620px, calc(100vh - 330px)); min-height: 420px; margin-top: 18px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.website-search-form { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.google-frame-fallback { margin-top: 12px; padding: 12px; border: 1px solid #6d5d32; border-radius: 7px; background: rgba(200, 160, 70, .08); color: #d9b96c; }
+.google-frame-fallback p { margin: 6px 0 10px; font-size: 11px; }
 .quick-search-label { margin-top: 25px; }
 .quick-searches { display: flex; flex-wrap: wrap; gap: 8px; }
 .quick-search { min-height: 35px; padding: 0 11px; border: 1px solid #2c3947; border-radius: 18px; background: #141d29; color: #cbd5df; cursor: pointer; font-size: 11px; transition: .16s ease; }

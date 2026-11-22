@@ -111,8 +111,20 @@
             <button class="quick-search" type="button" data-query="online fraud prevention tips">Online fraud prevention</button>
             <button class="quick-search" type="button" data-query="how to report cybercrime in India">Report cybercrime</button>
           </div>
+          <form id="websiteSearchForm" class="website-search-form">
+            <label class="field-label" for="websiteUrl">OPEN A WEBSITE INSIDE CYBER HUNTER</label>
+            <div class="google-search-row">
+              <input id="websiteUrl" class="name-input" type="text" autocomplete="url" placeholder="Enter a website address, for example example.com">
+              <button class="primary-button" type="submit">OPEN WEBSITE ↗</button>
+            </div>
+          </form>
           <div id="googleLoading" class="google-loading hidden" aria-live="polite">LOADING GOOGLE RESULTS...</div>
           <iframe id="googleResults" class="google-results hidden" title="Google search results" loading="eager" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div id="googleFrameFallback" class="google-frame-fallback hidden">
+            <strong>This website blocked embedded viewing.</strong>
+            <p id="googleFrameMessage">Cyber Hunter cannot override a site's iframe or security-policy restrictions.</p>
+            <button id="openCurrentTab" class="secondary-button" type="button">OPEN IN CURRENT TAB</button>
+          </div>
         </div>
       </section>
 

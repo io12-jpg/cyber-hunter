@@ -11,7 +11,7 @@ Cyber Hunter is a local-first cybersecurity toolkit built with plain HTML, CSS, 
 - Practice security basics with a short quiz.
 - Browse practical cybersecurity tips.
 - Switch between dark and light themes; the interface adapts for smaller screens and reduced-motion preferences.
-- Search Google inside the Cyber Hunter workspace without leaving the app.
+- Search Google and open compatible websites inside the Cyber Hunter workspace.
 
 ## Run
 
